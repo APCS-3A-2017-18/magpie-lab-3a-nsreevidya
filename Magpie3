@@ -38,11 +38,50 @@ public class Magpie3 {
 			response = "Why so negative?";
 		}
 		else if (findKeyword(statement, "mother") >= 0
-				|| findKeyword(statement, "father") >= 0
-				|| findKeyword(statement, "sister") >= 0
-				|| findKeyword(statement, "brother") >= 0)
+			|| findKeyword(statement, "father") >= 0
+			|| findKeyword(statement, "sister") >= 0
+			|| findKeyword(statement, "brother") >= 0)
 		{
 			response = "Tell me more about your family.";
+		}
+		else if (findKeyword(statement, "dog") >= 0 
+			|| findKeyword(statement, "cat") >= 0 
+			|| findKeyword(statement, "bird") >= 0)
+		{
+			response = "Tell me more about your pets.";
+		}
+		else if (findKeyword(statement, "Valley Christian") >= 0 
+			|| findKeyword(statement, "Valley") >= 0)
+		{
+			response = "That sounds like a good school!";
+		}
+		else if (statement.length() < 1)
+		{
+			response = "Say something, please.";
+		}
+		else if (findKeyword(statement, "A Fellowship of the Ring") >= 0
+			|| findKeyword(statement, "The Two Towers")  >= 0
+			|| findKeyword(statement, "The Return of the King") >= 0
+		{
+			response = "I know, it's the Lord of the Rings series!";
+		}
+		else if (findKeyword(statement, "pizza") >= 0
+			|| findKeyword(statement, "pasta") >= 0
+			|| findKeyword(statement, "piadine") >= 0)
+		{
+			response = "Italian, anyone?";
+		}
+		else if (findKeyword(statement, "failed") >= 0
+			|| findKeyword(statement, "procrastination") >= 0
+			|| findKeyword(statement, "work") >= 0)
+		{
+			response = "That's too bad. Take a deep breath and take it one step at a time.";
+		}
+		else if (findKeyword(statement, "movie") >= 0
+			|| findKeyword(statement, "shopping") >= 0
+			|| findKeyword(statement, "hiking") >= 0)
+		{
+			response = "That sounds like fun!";
 		}
 		else
 		{
@@ -67,47 +106,36 @@ public class Magpie3 {
 	 * @return the index of the first occurrence of goal in
 	 *         statement or -1 if it's not found
 	 */
-	private int findKeyword(String statement, String goal,
-			int startPos)
+	private int findKeyword(String statement, String goal, int startPos) 
 	{
 		String phrase = statement.trim();
-		// The only change to incorporate the startPos is in
-		// the line below
-		int psn = phrase.toLowerCase().indexOf(
-				goal.toLowerCase(), startPos);
-
-		// Refinement--make sure the goal isn't part of a
-		// word
+		// The only change to incorporate the startPos is in the line below
+		int psn = phrase.toLowerCase().indexOf(goal.toLowerCase(), startPos);
+		// Refinement--make sure the goal isn't part of a word
 		while (psn >= 0)
 		{
-			// Find the string of length 1 before and after
-			// the word
+			// Find the string of length 1 before and after the word
 			String before = " ", after = " ";
 			if (psn > 0)
 			{
-				before = phrase.substring(psn - 1, psn)
-						.toLowerCase();
+				before = phrase.substring(psn - 1, psn).toLowerCase();
 			}
 			if (psn + goal.length() < phrase.length())
 			{
 				after = phrase.substring(
 						psn + goal.length(),
-						psn + goal.length() + 1)
-						.toLowerCase();
+						psn + goal.length() + 1).toLowerCase();
 			}
 
-			// If before and after aren't letters, we've
-			// found the word
+			// If before and after aren't letters, we've found the word
 			if (((before.compareTo("a") < 0) || (before.compareTo("z") > 0)) // before is not a letter
 					&& ((after.compareTo("a") < 0) || (after.compareTo("z") > 0)))
 			{
 				return psn;
 			}
 
-			// The last position didn't work, so let's find
-			// the next, if there is one.
-			psn = phrase.indexOf(goal.toLowerCase(),
-					psn + 1);
+			// The last position didn't work, so let's find the next, if there is one.
+			psn = phrase.indexOf(goal.toLowerCase(), psn + 1);
 
 		}
 
@@ -162,10 +190,6 @@ public class Magpie3 {
 		}
 
 		return response;
-                
-                public void doNothing (int dud) {
-                   
-                }
 	}
 
 }
